@@ -1,10 +1,18 @@
 from datetime import datetime
 # changed this from flaskblog to __main__ because we defined the app running as __main__ in flaskblog.py
 # now rechanged it back to flaskblog cause we organized folders
-from flaskblog import db
+from flaskblog import db, login_manager
+from flask_login import UserMixin
+
+# decorator
 
 
-class User(db.Model):
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+class User(db.Model, UserMixin):
     # we are creating the user structure within DB
     id = db.Column(db.Integer, primary_key=True)
     # String(x) --> x = max number of characters, nullable = cannot be null
