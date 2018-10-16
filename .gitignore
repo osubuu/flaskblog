@@ -1,1 +1,3 @@
 flaskblog_env
+.vscode
+.gitignore
